@@ -91,5 +91,3 @@
 		});
 	};
 })(jQuery);
-
-$(".sortable").sortable();
