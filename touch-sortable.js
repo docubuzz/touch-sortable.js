@@ -1,17 +1,17 @@
 (function ($) {
 	$.fn.sortable = function () {
-		return this.each(function(){
-			
+		return this.each(function() {
+					
 			var supports_touch = 'ontouchstart' in document.documentElement;
 			var start_event_name = (supports_touch) ? 'touchstart' : 'mousedown';
 			$(this).children()
-                .on(start_event_name, onStart)
-                .css({
-                	cursor : "move",
-                	'user-select' : 'none'
-            	})
-                .attr('unselectable', 'on')
-                .on('selectstart', false);
+				.on(start_event_name, onStart)
+				.css({
+					cursor : "move",
+					'user-select' : 'none'
+				})
+				.attr('unselectable', 'on')
+				.on('selectstart', false);
 
 			var el;
 			var parentTop, parentBtm;
@@ -22,7 +22,7 @@
 				el = $(supports_touch ? e.touches[0].target : e.target);
 				parentTop = el.parent().position().top;
 				parentBtm = parentTop + el.parent().innerHeight() + el.height();
-                el.addClass('inMotion').css({position: 'relative', "z-index": 1});
+				el.addClass('inMotion').css({position: 'relative', "z-index": 1});
 
 				/* Bind respective events based on start trigger */
 				if (e.touches) {
@@ -49,7 +49,7 @@
 				/* Move item  */
 				move = pageY - start_y;
 				el.css('top', move);
-                
+				
 				/* Re-order the list once item crosses over the neighboring elements */
 				if (move < -el.outerHeight()) {
 
@@ -59,7 +59,7 @@
 							
 							/* Animate and swap */
 							el.prev().animate({"top": el.outerHeight()}, 150, function() {
-                                start_y = start_y - el.outerHeight();
+								start_y = start_y - el.outerHeight();
 								$(this).insertAfter(el).css({'top':''});
 								el.css('top', "+=" + el.outerHeight());
 							});
@@ -74,17 +74,17 @@
 							el.next().animate({"top": -el.outerHeight()}, 150, function(){
 								$(this).insertBefore(el).css({'top':''});
 								start_y = start_y + el.outerHeight();
-                                el.css('top', "-=" + el.outerHeight());
+								el.css('top', "-=" + el.outerHeight());
 							});
 						}
 					}
 				}
-                
+				
 				e.preventDefault();
 			}
 
 			function onEnd(e) {
-                el.css('top','auto').removeClass('inMotion').css({ 'z-index' : '' });
+				el.css('top','auto').removeClass('inMotion').css({ 'z-index' : '' });
 				$('body').unbind('.sortable', onMove).unbind('.sortable', onEnd);
 				e.preventDefault();
 			}
