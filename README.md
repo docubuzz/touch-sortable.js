@@ -4,13 +4,21 @@ Yet another sortable list plugin for jQuery. touch-sortable.js is a tiny ( ~700 
 
 ## Installation and usage
 
-Include the touch-sortable script after the jQuery library
+Include the touch-sortable script after the jQuery library.
 
     <script src="/path/to/touch-sortable.js"></script>
 
-Execute it against a ul element
+Execute it against a ul element.
 
     $(".sortable").sortable();
+    
+Use the onComplete event to know when reordering is complete. Callback returns the list that was reordered.
+
+    $(".sortable").sortable({
+    	onComplete: function(ul){
+    		// Put your code here!
+    	}
+    });
 
 
 ## Example
