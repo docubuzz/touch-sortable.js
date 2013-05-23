@@ -7,9 +7,9 @@
             $(this).children()
                 .on(start_event_name, onStart)
                 .css({
-                	cursor: "move",
-                    	'user-select': 'none'
-            	})
+                cursor: "move",
+                    'user-select': 'none'
+            })
                 .attr('unselectable', 'on')
                 .on('selectstart', false);
 
@@ -90,9 +90,7 @@
 
                             /* Animate and swap */
 
-                            el.next().animate({
-                                'top': -elDistance
-                            }, 150, function () {
+                            el.next().animate({ 'top': -elDistance}, 150, function () {
                                 $(this).insertBefore(el).css({
                                     'top': ''
                                 });
@@ -103,7 +101,7 @@
                         }
                     }
                 }
-
+                
                 if (e) {
                     e.preventDefault();
                 }
@@ -111,18 +109,17 @@
 
             function onEnd(e) {
                 $('body').off('.sortable');
-
-                function complete() {
-                    el.animate({'top': "-=" + el.css('top')}, 150, function () {
-                        el.css('top', 'auto').removeClass('inMotion').css('z-index', '');
+                
+                /* Execute onEnd only after all animation is complete */
+                $('.sortable').children().promise().done(function() {
+                    console.log('complete')
+                    el.animate({ 'top': "-=" + el.css('top')}, 150, function () {
+                        el.css('top', 'auto').removeClass('inMotion').css({
+                            'z-index': ''
+                        });
                     });
-                }
+                });
 
-                if (el.prev().is(':animated') || el.next().is(':animated')) {
-                    setTimeout(function () { onEnd() }, 50);
-                } else {
-                    complete();
-                }
             }
         });
     };
