@@ -31,7 +31,7 @@ Currently, touch-sortable.js provides support for unordered lists. Define your l
 
 ## Styling
 
-An element being dragged around has the class 'inMotion' - which can be used to style it in css. The assumption made in touch-sortable.js is, all elements in list are of identical sizes.
+An element being dragged around has the class `inMotion` - which can be used to style it in css. The assumption made in touch-sortable.js is, all elements in list are of identical sizes.
 
     li {
     	display:block; padding:10px; margin:5px 0; background:#eee;
