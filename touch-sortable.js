@@ -1,5 +1,6 @@
 (function ($) {
-    $.fn.sortable = function () {
+    $.fn.sortable = function (options) {
+        options = options || {};
         return this.each(function () {
 
             var supports_touch = 'ontouchstart' in document.documentElement;
@@ -7,15 +8,15 @@
             $(this).children()
                 .on(start_event_name, onStart)
                 .css({
-                cursor: "move",
-                    'user-select': 'none'
-            })
+                        cursor: "move",
+                    	'user-select': 'none'
+            	})
                 .attr('unselectable', 'on')
                 .on('selectstart', false);
 
             var el;
             var parentTop, parentBtm;
-            var start_y;
+            var start_y, anim_multiple;
             var elDistance = $(this).children(':nth-child(2)').offset().top - $(this).children(':nth-child(1)').offset().top;
 
             function onStart(e) {
@@ -41,6 +42,7 @@
 
             function onMove(e) {
                 var move;
+                
                 if (e) {
                     e = e.originalEvent;
 
@@ -52,6 +54,13 @@
                     } else if (pageY >= parentBtm) {
                         pageY = parentBtm;
                     }
+                  
+                    /* If the cursor is near document boundary, scroll the page */
+                    if (50 >= (pageY - $(window).scrollTop())) {
+                        window.scrollBy(0, -5);
+                    } else if (50 >= ($(window).height() - pageY)) {
+                        window.scrollBy(0, 5);
+                    }
 
                     /* Move item  */
                     move = pageY - start_y;
@@ -60,7 +69,7 @@
                     move = el.css('top').split('px')[0];
                 }
 
-
+                anim_multiple = Math.abs(Math.floor(move/elDistance));
 
                 /* Re-order the list once item crosses over the neighboring elements */
                 if (move < -elDistance) {
@@ -70,13 +79,9 @@
                         if (!el.prev().is(':animated')) {
 
                             /* Animate and swap */
-                            el.prev().animate({
-                                'top': elDistance
-                            }, 150, function () {
+                            el.prev().animate({'top': elDistance}, 150/anim_multiple, function () {
                                 start_y = start_y - elDistance;
-                                $(this).insertAfter(el).css({
-                                    'top': ''
-                                });
+                                $(this).insertAfter(el).css({'top': ''});
                                 el.css('top', '+=' + elDistance);
                                 onMove();
                             });
@@ -90,18 +95,16 @@
 
                             /* Animate and swap */
 
-                            el.next().animate({ 'top': -elDistance}, 150, function () {
-                                $(this).insertBefore(el).css({
-                                    'top': ''
-                                });
+                            el.next().animate({'top': -elDistance}, 150/anim_multiple, function () {
                                 start_y = start_y + elDistance;
+                                $(this).insertBefore(el).css({'top': ''});
                                 el.css('top', '-=' + elDistance);
                                 onMove();
                             });
                         }
                     }
                 }
-                
+
                 if (e) {
                     e.preventDefault();
                 }
@@ -109,17 +112,21 @@
 
             function onEnd(e) {
                 $('body').off('.sortable');
-                
-                /* Execute onEnd only after all animation is complete */
-                $('.sortable').children().promise().done(function() {
-                    console.log('complete')
-                    el.animate({ 'top': "-=" + el.css('top')}, 150, function () {
-                        el.css('top', 'auto').removeClass('inMotion').css({
-                            'z-index': ''
-                        });
-                    });
-                });
 
+                function complete() {
+                    el.animate({'top': "-=" + el.css('top')}, 150, function () {
+                        el.css('top', 'auto').removeClass('inMotion').css('z-index', 0);
+                        if(options.onComplete){
+                            options.onComplete(el.parent());
+                        }
+                    });
+                }
+
+                if (el.prev().is(':animated') || el.next().is(':animated')) {
+                    setTimeout(function () { onEnd() }, 50);
+                } else {
+                    complete();
+                }
             }
         });
     };
