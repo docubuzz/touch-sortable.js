@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>touch-sortable.js</title>
+		<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+		<style>
+		body {
+			font-family: 'Lato', Helvetica Nueue, sans-serif;
+			text-align: center;
+			font-size: 18px;
+			padding: 0;
+			margin-left: auto;
+			margin-right: auto;
+			width: 80%
+		}
+		h1 {
+			font-size: 80px;
+			font-weight: 300;
+		}
+		h2 {
+			font-size: 30px;
+			font-weight: 100;
+			color: #B0B0B0;
+		}
+		p {
+			padding: 5px;
+		}
+	
+		div.author{
+			float:left;
+			padding:20px;
+		}
+		div.author-container {
+			display:block;
+			margin-left:auto;
+			margin-right:auto;
+			width: 80%;
+		}
+		.portrait {
+			width: 120px;
+			border-radius: 50%;
+			-moz-border-radius: 50%;
+			-webkit-border-radius: 50%;
+		}
+	
+		.sortable {
+		     margin: auto;
+		     padding: 0;
+		     width: 310px;
+		     -webkit-touch-callout: none;
+		     -webkit-user-select: none;
+		     -khtml-user-select: none;
+		     -moz-user-select: none;
+		     -ms-user-select: none;
+		     user-select: none;
+		 }
+		 li {
+		     list-style: none;
+		     border: 1px solid #CCC;
+		     background: #E0DEDF;
+		     color: #1C94C4;
+			 font-size: 24px;
+		     margin: 10px;
+		     padding: 5px;
+		     height: 32px;
+		     width: 280px;
+	 			border-radius: 10px;
+	 			-moz-border-radius: 10px;
+	 			-webkit-border-radius: 10px;
+		 }
+		 li.disabled {
+		     opacity: 0.5;
+		 }
+		 li.inMotion {
+		     position:relative;
+		     z-index: 1;
+		     opacity: .7;
+		     box-shadow: 0 3px 7px rgba(0,0,0,.3);
+		 }
+		 hr {
+		   height: 3px;
+		   border: 0;
+		   background-color: #c3c3c3;
+		   background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#f7f6f4), to(#f7f6f4), color-stop(50%, #fff));
+		   background-image: -webkit-linear-gradient(left, #f7f6f4, #fff, #f7f6f4);
+		   background-image: -moz-linear-gradient(left, #f7f6f4, #fff, #f7f6f4);
+		   background-image: -ms-linear-gradient(left, #f7f6f4, #fff, #f7f6f4);
+		   background-image: -o-linear-gradient(left, #f7f6f4, #fff, #f7f6f4);
+		 }
+		 hr::after {
+		   content: '';
+		   display: block;
+		   height: 1px;
+		   background-color: #ffffff;
+		   background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#f7f6f4), to(#f7f6f4), color-stop(50%, #c3c3c3));
+		   background-image: -webkit-linear-gradient(left, #f7f6f4, #c3c3c3, #f7f6f4);
+		   background-image: -moz-linear-gradient(left, #f7f6f4, #c3c3c3, #f7f6f4);
+		   background-image: -ms-linear-gradient(left, #f7f6f4, #c3c3c3, #f7f6f4);
+		   background-image: -o-linear-gradient(left, #f7f6f4, #c3c3c3, #f7f6f4);
+		 }
+		 section.code {
+			 display:block;
+			 text-align:left;
+			 font-size: 14px;
+			 margin-left:auto;
+			 margin-right:auto;
+			 width:50%;
+		 }
+		</style>
+	</head>
+	<body>
+		<div class ="container">
+			<a href="https://github.com/docubuzz/touch-sortable.js.git"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+			<div class="header">
+				<hgroup>
+					<h1>touch-sortable.js</h1>
+					<h2>Sortable lists. Animated.</h2>
+				</hgroup><br>
+			</div>
+
+			<div class="content">
+				<section id="demo">
+					
+					<div class="example">
+						<ul class="sortable">
+							<li>Sortable</li>
+							<li>lists</li>
+							<li>in</li>
+							<li>a</li>
+							<li>jiffy!</li>
+						</ul>
+					</div>
+					<br>
+					<p>Yet another sortable list plugin for jQuery. touch-sortable.js is a tiny (~700 bytes minfied and gziped) purpose driven library that helps create animated sortable lists in a jiffy. Supports both mouse and touch events.</p>			
+				</section><hr>
+				
+				<section id="usage">
+					<h2>Usage</h2>
+					
+					<section class="code">
+					<pre class="prettyprint"><code>
+&ltul class="sortable"&gt
+    &ltli&gtItem 1&lt/li&gt
+    &ltli&gtItem 2&lt/li&gt
+    &ltli&gtItem 3&lt/li&gt
+    &ltli&gtItem 4&lt/li&gt
+&lt/ul&gt
+
+&ltscript src="jquery.sortable.js"&gt&lt/script>
+&ltscript&gt
+    $('.sortable').sortable();
+&lt/script&gt
+					</code></pre>
+					</section>
+					<p>Currently, touch-sortable.js provides support for unordered lists. Define your list as shown.</p>
+				</section><hr>
+				
+				<section id="install">
+					<h2>Installation</h2>
+					<section class="code">
+						<pre class="prettyprint"><code>&ltscript src="/path/to/touch-sortable.js"&gt&lt/script&gt</code></pre>
+					</section>
+					<p>Include the touch-sortable script after the jQuery library.</p>
+
+					<section class="code">
+						<pre class="prettyprint"><code>$(".sortable").sortable();</code></pre> 
+					</section>
+					<p>Execute it against a ul element.</p>
+					
+					<section class="code">
+						<pre class="prettyprint"><code>
+$(".sortable").sortable({
+	onComplete: function(ul){ 
+	  // Put your code here! 
+	} 
+});
+						</code></pre>
+					</section>
+					<p>Use the onComplete event to know when reordering is complete. Callback returns the list that was reordered.</p>
+					
+				</section><hr>
+				
+				<section id="styling">
+					<h2>Styling</h2>
+					<section class="code">
+						<pre class="prettyprint"><code>
+li {
+    display:block; padding:10px; margin:5px 0; background:#eee;
+}
+li.inMotion {
+    box-shadow:0 1px 3px rgba(0,0,0,.3);
+}
+						</code></pre>
+					</section>
+					<p>An element being dragged around has the class "inMotion" - which can be used to style it in CSS.</p>
+				</section><hr>
+				<section id="authors">
+					<h2>Authors</h2>
+					<div class="author-container">
+						<div class="author">
+							<a href="https://github.com/jieyanhuang"><img class="portrait" src="https://secure.gravatar.com/avatar/8f71ef6a9d7027a9d9a6eab8f9118ca8?s=200"></img></a>
+							<section class="info">
+								<p>Jeremy Huang</p>
+								<p>Email: <a href="mailto:jieyanhuang@gmail.com">jieyanhuang@gmail.com</a></p>
+								<p>Github: <a href="https://github.com/jieyanhuang">https://github.com/jieyanhuang</a></p>
+							</section>
+						</div>
+						<div class="author">
+							<a href="https://github.com/ashishpuliyel"><img class="portrait" src="https://secure.gravatar.com/avatar/159ea27e6ece42413da869d8a7be3bc2?s=200"></img></a>
+							<section class="info">
+								<p>Ashish Puliyel</p>
+								<p>Email: <a href="mailto:ashish@puliyel.com">ashish@puliyel.com</a></p>
+								<p>Github: <a href="https://github.com/ashishpuliyel">https://github.com/ashishpuliyel</a></p>
+							</section>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="footer"></div>
+		</div>
+	</body>	
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="./touch-sortable.min.js"></script>
+	<script>
+		$('.sortable').sortable();
+	</script>
+</html>
