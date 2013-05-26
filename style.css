@@ -12,6 +12,10 @@
 		font-size: 80px;
 		font-weight: 300;
 	}
+	h1 a { 
+		text-decoration:none; 
+		color:#000;
+	}
 	h2 {
 		font-size: 30px;
 		font-weight: 100;
