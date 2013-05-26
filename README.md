@@ -1,6 +1,8 @@
 touch-sortable.js
 =================
-Yet another sortable list plugin for jQuery. touch-sortable.js is a tiny ( ~800 bytes minfied and gziped) purpose driven library that helps create animated sortable lists in a jiffy. Supports both mouse and touch events.
+Yet another sortable list plugin for jQuery. touch-sortable.js is a tiny ( ~800 bytes minfied and gziped) purpose driven library that helps to create animated sortable lists in a jiffy. Supports both mouse and touch events.
+
+#####http://docubuzz.github.io/touch-sortable.js
 
 ## Installation and usage
 
@@ -12,7 +14,7 @@ Execute it against a ul element.
 
     $(".sortable").sortable();
     
-Use the onComplete event to know when reordering is complete. Callback returns the list that was reordered.
+Use the onComplete event to know when reordering is completed. Callback returns the list that was reordered.
 
     $(".sortable").sortable({
     	onComplete: function(ul){
@@ -23,7 +25,7 @@ Use the onComplete event to know when reordering is complete. Callback returns t
 
 ## Example
 
-Currently, touch-sortable.js provides support for unordered lists. Define your list as shown.
+Currently, touch-sortable.js provides support for unordered lists. Define your list as shown. Check out a working example on our [demo page](http://docubuzz.github.io/touch-sortable.js).
 
 	<ul class="sortable">
 		<li>Item 1</li>
@@ -39,7 +41,7 @@ Currently, touch-sortable.js provides support for unordered lists. Define your l
 
 ## Styling
 
-An element being dragged around has the class `inMotion` - which can be used to style it in css. Touch-sortable.js assumes elements in list are all the same height.
+An element being dragged around has the class `inMotion` - which can be used to style in css. Touch-sortable.js assumes elements in list are all the same height.
 
     li {
     	display:block; padding:10px; margin:5px 0; background:#eee;
