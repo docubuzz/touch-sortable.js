@@ -28,7 +28,7 @@
             var el, parentTop, parentBtm, positionAtStart, hasQueuedAni;
 
             function onStart(e) {
-                e = e.originalEvent;
+                e = e.originalEvent.touches ? e.originalEvent : e;
                 el = $(e.touches ? e.touches[0].target : e.target);
                 if (!el.is('li')) el = el.closest('li');
                 parentTop = parent.position().top;
@@ -51,7 +51,7 @@
             function onMove(e) {
                 var positionDelta;
                 if (e) {
-                    e = e.originalEvent;
+                    e = e.originalEvent.touches ? e.originalEvent : e;
                     var positionNow = (e.touches) ? e.touches[0].pageY : e.pageY;
 
                     /* Constrain dragging to limits of parent */
