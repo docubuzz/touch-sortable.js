@@ -14,7 +14,7 @@ Execute it against a ul element.
 
     $(".sortable").sortable();
     
-Use the onComplete event to know when reordering is completed. Callback returns the list that was reordered.
+Use the onComplete event to know when reordering is completed. Callback returns the `li` element that was reordered.
 
     $(".sortable").sortable({
     	onComplete: function(ul){
@@ -56,6 +56,7 @@ Any feedback to make this plugin better is welcomed!
 
 If you have any pull requests/bug reports, raise them up in the [Pull Requests](https://github.com/docubuzz/touch-sortable.js/pulls), or [Issues](https://github.com/docubuzz/touch-sortable.js/issues).
 
+We use the [Closure Compiler Service](http://closure-compiler.appspot.com/home), `@compilation_level SIMPLE_OPTIMIZATIONS` for our minified version. If you have a pull request, kindly minify your changes as well to help us out!
 ## Authors
 [Jeremy Huang](https://github.com/jieyanhuang)
 
