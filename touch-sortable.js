@@ -27,12 +27,16 @@
             /* Set with each onStart and updated on move if necessary */
             var el, parentTop, parentBtm, positionAtStart, hasQueuedAni;
 
+            /* Store original values to reset them at the end */
+            var originalPosition;
+
             function onStart(e) {
                 e = e.originalEvent;
                 el = $(e.touches ? e.touches[0].target : e.target);
                 parentTop = parent.position().top;
                 parentBtm = parentTop + parent.innerHeight() + el.height();
 
+                originalPosition = els.css('position');
                 els.css('position','relative');
                 el.addClass('inMotion').css( 'z-index', 1);
                 hasQueuedAni = false;
@@ -124,7 +128,7 @@
                         'top': "-=" + el.css('top')
                     }, 150, function () {
                         el.css({'top':'', 'z-index':''}).removeClass('inMotion');
-                        els.css('position','');                        
+                        els.css('position',originalPosition);               
                         if (options.onComplete) {
                             options.onComplete(el.parent());
                         }
