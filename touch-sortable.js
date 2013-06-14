@@ -127,7 +127,7 @@
                         el.css({'top':'', 'z-index':''}).removeClass('inMotion');
                         els.css('position','');                        
                         if (options.onComplete) {
-                            options.onComplete(el.parent());
+                            options.onComplete(el);
                         }
                     });
                 }
