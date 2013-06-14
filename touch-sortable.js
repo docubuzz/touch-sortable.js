@@ -29,7 +29,7 @@
 
             function onStart(e) {
                 e = e.originalEvent;
-                el = $(e.touches ? e.touches[0].target : e.target);
+                if (!el.is('li')) el = el.closest('li');
                 parentTop = parent.position().top;
                 parentBtm = parentTop + parent.innerHeight() + el.height();
 
